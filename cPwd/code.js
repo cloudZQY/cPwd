@@ -4,17 +4,19 @@ chrome.tabs.executeScript(
 chrome.runtime.onMessage.addListener(function(host) {
   var build = document.getElementById('build');
   var input = document.getElementById('input');
-  var key = document.getElementById('key').value;
   build.addEventListener('click', function() {
-      showPwd();
+      var key = document.getElementById('key').value;
+      showPwd(host, key);
   })
   input.addEventListener('click', function() {
-      showAndInputPwd();
+      var key = document.getElementById('key').value;
+      showAndInputPwd(host, key);
   })
   document.getElementById('key').addEventListener('keydown', function(event){
+    var key = document.getElementById('key').value;
     if( event.keyCode === 13) {
       showAndInputPwd();
-      window.close();
+      window.close(host, key);
     }
   })
   var getPwd = function (host, key) {
